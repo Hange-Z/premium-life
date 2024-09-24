@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/collection/collection",
+    "pages/community/community",  
+    "pages/postPage/postPage", 
+    "pages/photo-gallery/photo-gallery",
+     "assets/图标"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "固定导航栏示例"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

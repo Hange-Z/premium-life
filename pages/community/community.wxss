@@ -1,0 +1,142 @@
+/* container 使得内容区域的布局方式适应屏幕 */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+/* 导航项样式 */
+.bottom-navbar {
+  display: flex; /* 使用弹性盒布局 */
+  justify-content: flex-start; /* 使子项靠左对齐 */
+  margin-bottom: 20px; /* 下边距 */
+}
+
+.nav-item {
+  font-size: 20px; /* 默认字体大小 */
+  margin-right: 20px; /* 右边距 */
+  margin: 0 25px;
+  background-color: #ffffff;
+}
+
+/* 激活的导航项样式 */
+.nav-item.active {
+  font-size: 25px; /* 激活时字体变大 */
+  font-weight: bold; /* 加粗 */
+  color: #e9ae0c; /* 文字颜色 */
+}
+/* 动态滚动样式 */
+.dynamicView {
+  flex: 1;
+  background-color: #d3d3d3;
+  overflow-y: scroll;
+}
+
+/* 单个帖子样式 */
+.post1-item {
+  margin: 9px;
+  background-color: #ffffff;
+  /* 帖子背景色 */
+  border-radius: 8px;
+  /* 圆角 */
+  overflow: hidden;
+  /* 避免内容溢出 */
+  box-shadow: 0 1px 5px rgb(255, 255, 255);
+  /* 阴影 */
+  display: flex;
+  height: 100px;
+}
+
+/* 帖子内容样式 */
+.post1-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 使内容左对齐 */
+}
+
+/* 帖子标题样式 */
+.post1-title {
+  flex: 1;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  /* 标题颜色 */
+}
+
+/* 帖子图片样式 */
+.post1-image {
+  width: 25%;
+  /* 图片占据帖子宽度的四分之一 */
+  height: 100%;
+}
+
+/* 作者名字 */
+.post1-author {
+  font-size: 16px;
+  color: #888;
+  margin-left: 10px; /* 或其他你想要的边距值 */
+}
+
+/* 帖子内容 */
+.post1-body {
+  font-size: 17px;
+  color: #888;
+  margin-left: 10px; /* 或其他你想要的边距值 */
+  align-items: center;     /* 垂直居中 */
+  height: 400px;     /* 设置容器的高度，可以根据实际需要调整 */
+}
+
+/* 图集滚动样式 */
+.galleryView {
+  flex: 1; 
+  background-color: #ffffff; 
+  height: 70%;
+  width: 100%;
+  /* 允许上下滚动 */
+  overflow: auto;
+ }  
+
+ /* 帖子容器 */
+ .posts2-container {
+  display: flex; 
+  flex-wrap: wrap;/* 自动换行*/ 
+  padding: 10px; 
+} 
+
+/* 每个帖子 */
+.post2 {
+  width: 48%; /* 每个帖子宽度，占两列中的一列 */
+  margin: 1%; /* 帖子之间的间距 */
+  background-color: rgb(255, 255, 255); 
+  border-radius: 10px; 
+  overflow: hidden; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+/* 帖子图片 */
+.post2-image {
+  width: 100%; 
+  height: 150px; /* 图片高度 */
+  object-fit: cover; 
+}
+/* 帖子标题 */
+.post2-title {
+  padding: 10px; 
+  font-size: 14px; 
+  text-align: center; 
+  color: rgb(0, 0, 0); 
+}
+/* 作者名字 */
+.post2-author {
+  font-size: 16px;
+  color: #888;
+}
+/*    收藏图标    */
+ /* .favorite-icon {  */
+  /* width: 15px; */
+   /* 或根据你的图标尺寸调整 */
+  /* height: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+} */

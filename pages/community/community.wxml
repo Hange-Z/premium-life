@@ -1,0 +1,46 @@
+<!--pages/community/community.wxml-->
+<view class="container">
+  <!-- 切换导航栏 -->
+  <view class="bottom-navbar">
+    <button class="nav-item {{currentTab === 'dynamic' ? 'active' : ''}}" bindtap="switchTab" data-tab="dynamic">动态</button>
+    <button class="nav-item {{currentTab === 'gallery' ? 'active' : ''}}" bindtap="switchTab" data-tab="gallery">图集</button>
+  </view>
+  <scroll-view class="dynamicView" scroll-y="ture" wx:if="{{currentTab === 'dynamic'}}">
+    <!-- 动态内容 -->
+    <view class="post1-list">
+      <block wx:for="{{posts1}}" wx:key="index">
+        <!-- 添加点击跳转标签 -->
+        <navigator url="/pages/postPage/postPage?id={{item.id}}" class="post1-item">
+          <!-- 帖子主体 -->
+          <view class="post1-content">
+            <!-- 帖子标题 -->
+            <view class="post1-title">{{item.title}}</view>
+            <!-- 帖子内容 -->
+            <view class="post1-body">{{item.body}}</view>
+            <!-- 帖子作者 -->
+            <view class="post1-author">{{item.author}}</view>
+          </view>
+          <!-- 帖子图片 -->
+          <image class="post1-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        </navigator>
+      </block>
+    </view>
+  </scroll-view>
+  <scroll-view class="galleryView" scroll-y="ture" wx:if="{{currentTab === 'gallery'}}">
+    <!-- 图集内容 -->
+    <view class="posts2-container">
+      <!-- 循环生成帖子 -->
+      <view class="post2" wx:for="{{posts2}}" wx:key="index">
+        <!-- 添加点击跳转标签 -->
+        <navigator url="/pages/photo-gallery/photo-gallery?id={{item.id}}" class="post2-item">
+          <image class="post2-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view class="post2-title">{{item.title}}</view>
+          <!-- 帖子作者 -->
+          <view class="post2-author">{{item.author}}</view>
+          <!--   收藏图标   -->
+          <!-- <image class="favorite-icon" src="{{isFavorite ? '/assets/图标/已收藏.png' : '/assets/图标/收藏.png'}}" bindtap="onFavorite" /> -->
+        </navigator>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,57 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+
+/*     设置动态内容代码     */
+
+
+/* 全局页面样式，确保页面占满视口高度 */
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  padding-top: 50px; /* 调整以避免被固定的导航栏遮挡 */
+}
+
+/* 导航栏样式，固定在页面顶部 */
+nav {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  background-color: rgb(255, 255, 255); 
+  color: #fff; 
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000; /* 确保它位于其他内容之上 */
+}
+
+
+/* 加固定导航栏代码 */
+
+/* app.wxss */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  z-index: 1000; 
+}
+.content {
+  padding-top: 50px; /* 调整以避免被固定的导航栏遮挡 */
+}
+
+
+
+
+

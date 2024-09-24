@@ -1,0 +1,60 @@
+<!-- 导航栏以及返回键 -->
+<view class="navbar">
+  <view class="back-button" bindtap="onBack">
+    <image src="/assets/图标/返回.png" class="back-icon" />
+  </view>
+  <!-- <text class="title">我的收藏</text> -->
+</view>
+
+<!-- 作者信息 -->
+<view class="author-info">
+  <image class="author-avatar" src="{{post.author.avatar}}" />
+  <text class="author-nickname">{{post.author.nickname}}</text>
+</view>
+
+<!-- 图集图片 -->
+<view class="carousel-container">
+  <swiper class="carousel" indicator-dots="false" autoplay="true" interval="3000" circular="true">
+    <block wx:for="{{post.images}}" wx:key="index">
+      <swiper-item>
+        <image class="carousel-image" src="{{item.src}}" mode="aspectFill" style="width: 100%; height: 100%;"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!-- 帖子标题 -->
+<view class="post-title">{{post.title}}</view>
+
+<!-- 帖子内容 -->
+<view class="button-container">
+  <!-- 收藏、点赞和评论按钮 -->
+  <view class="action-bar">
+    <view class="action-item" bindtap="toggleFavorite">
+      <image class="action-icon" src="{{isFavorited ? '/assets/图标/已收藏.png' : '/assets/图标/收藏.png'}}" />
+      <!-- <text class="action-text">收藏</text> -->
+    </view>
+    <view class="action-item" bindtap="toggleLike">
+      <image class="action-icon" src="{{isLiked ? '/assets/图标/点赞蓝色.png' : '/assets/图标/点赞灰色.png'}}" />
+      <!-- <text class="action-text">点赞</text> -->
+      <text class="action-text">{{post.likes}}</text>
+    </view>
+  </view>
+
+  <!-- 评论区 -->
+  <view class="comments-section">
+    <view class="comment-input">
+      <textarea placeholder="写下你的评论..." bindinput="onCommentInput" />
+      <button bindtap="submitComment">提交</button>
+    </view>
+  </view>
+
+</view>
+<view class="comments-list">
+  <block wx:for="{{post.comments}}" wx:key="id">
+    <view class="comment-item">
+      <image class="comment-avatar" src="{{item.avatar}}" />
+      <text class="comment-nickname">{{item.nickname}}:</text>
+      <text class="comment-content">{{item.content}}</text>
+    </view>
+  </block>
+</view>
