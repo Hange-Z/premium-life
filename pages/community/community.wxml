@@ -37,8 +37,6 @@
           <view class="post2-title">{{item.title}}</view>
           <!-- 帖子作者 -->
           <view class="post2-author">{{item.author}}</view>
-          <!--   收藏图标   -->
-          <!-- <image class="favorite-icon" src="{{isFavorite ? '/assets/图标/已收藏.png' : '/assets/图标/收藏.png'}}" bindtap="onFavorite" /> -->
         </navigator>
       </view>
     </view>

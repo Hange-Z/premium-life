@@ -1,10 +1,9 @@
 {
-  "pages": [
-    "pages/collection/collection",
-    "pages/community/community",  
+  "pages": [ 
+    "pages/community/community",
+    "pages/collection/collection",  
     "pages/postPage/postPage", 
-    "pages/photo-gallery/photo-gallery",
-     "assets/图标"
+    "pages/photo-gallery/photo-gallery"  
   ],
   "window": {
     "navigationBarTextStyle": "black",

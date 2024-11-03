@@ -26,9 +26,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgb(228, 142, 142);
+  background-color: rgb(179, 209, 98);
   z-index: 10; /* 确保在内容区域之上 */
-  border-bottom: 1px solid rgb(172, 41, 41);
+  border-bottom: 1px solid rgb(255, 255, 255);
   padding: 17px;
   text-align: center;
 }
@@ -49,8 +49,8 @@
 }
 .nav-item.active {
   font-weight: bold;
-  color: #e9ae0c; /* 激活时的字体颜色 */
-  border-bottom: 2px solid #e9ae0c; /* 激活时的下边框 */
+  color: #c7e659; /* 激活时的字体颜色 */
+  border-bottom: 2px solid #b2e652; /* 激活时的下边框 */
 }
 /* 滚轮区域 */
 .dynamicView {

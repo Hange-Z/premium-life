@@ -2,7 +2,7 @@
   <!-- 最上方的固定导航栏 -->
   <view class="top-navbar">
     <view class="back-button" bindtap="onBack">
-      <image src="/assets/图标/返回.png" class="back-icon" />
+      <image src="cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/返回_compressed.png" class="back-icon" />
     </view>
     <text>我的收藏</text>
   </view>
