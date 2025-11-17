@@ -1,0 +1,59 @@
+<!-- 优惠券页面 -->
+<view class="coupons-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">优惠券</text>
+    <view class="header-placeholder"></view>
+  </view>
+  <!-- 标签栏 -->
+  <view class="tabs-bar">
+    <view 
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-tab="{{item.key}}"
+      bindtap="switchTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 优惠券列表 -->
+  <view class="coupons-list">
+    <view 
+      class="coupon-item {{item.type}}"
+      wx:for="{{filteredCoupons}}"
+      wx:key="id"
+    >
+      <view class="coupon-left">
+        <view class="coupon-value">
+          <text class="value-symbol" wx:if="{{item.type === 'discount'}}">¥</text>
+          <text class="value-number">{{item.value}}</text>
+          <text class="value-unit" wx:if="{{item.type === 'percent'}}">折</text>
+        </view>
+        <text class="coupon-condition">{{item.condition}}</text>
+      </view>
+      <view class="coupon-right">
+        <text class="coupon-name">{{item.name}}</text>
+        <text class="coupon-time">有效期至 {{item.endTime}}</text>
+        <text class="coupon-desc">{{item.description}}</text>
+        <button 
+          class="use-btn" 
+          wx:if="{{currentTab === 'available'}}"
+          bindtap="useCoupon"
+          data-id="{{item.id}}"
+        >
+          立即使用
+        </button>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredCoupons.length === 0}}">
+      <text class="empty-icon">🎫</text>
+      <text class="empty-text">暂无{{currentTab === 'available' ? '可用' : currentTab === 'used' ? '已用' : '已过期'}}优惠券</text>
+    </view>
+  </view>
+</view>
+

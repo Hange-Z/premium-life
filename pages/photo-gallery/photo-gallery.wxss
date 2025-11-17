@@ -1,193 +1,173 @@
-/*   代码   */
+/* 图片分享页面样式 */
+.gallery-container {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
 
-/* 顶部导航栏样式 */
-.navbar {
+/* 顶部导航 */
+.header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  height: 60px;
-  background-color: #7ab7da;
-  border-bottom: 1px solid rgb(255, 255, 255);
+  padding: 30rpx 40rpx;
+  padding-top: calc(30rpx + env(safe-area-inset-top));
+  background-color: #fff;
+  border-bottom: 1rpx solid #eee;
 }
 
-/* 返回按钮样式 */
-.back-button {
-  position:absolute;
-  height:15px;
-  left: 15px;
+.back-btn {
+  font-size: 40rpx;
+  color: #333;
+  padding: 10rpx;
 }
 
-.back-icon {
-  width: 24px;
-  height: 24px;
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
 }
 
-/* 作者头像，帖子内容，评论等 */
-
-
-/* 整个页面容器样式 */
-.container {
-  padding: 10px; /* 页面内边距 */
-  text-align: left; /* 确保文本内容左对齐 */
+.share-btn {
+  font-size: 30rpx;
+  color: #ff6b35;
+  padding: 10rpx 20rpx;
+  font-weight: bold;
 }
 
-/* 作者信息容器样式 */
-.author-info {
-  display: flex; /* 使用 Flexbox 布局 */
-  align-items:center; /* 垂直居中对齐头像和昵称 */
-  margin-bottom: 5px; /* 底部外边距 */
+/* 图片展示区 */
+.gallery-content {
+  padding: 20rpx;
 }
 
-/* 作者头像样式 */
-.author-avatar {
-  width: 40px; /* 头像宽度 */
-  height: 40px; /* 头像高度 */
-  border-radius: 50%; /* 圆形头像 */
-  margin-right: 10px; /* 头像与昵称之间的间距 */
+.gallery-swiper {
+  width: 100%;
+  height: 500rpx;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
 }
 
-/* 作者昵称样式 */
-.author-nickname {
-  font-size: 16px; /* 字体大小 */
-  color: rgb(0, 0, 0); /* 字体颜色 */
-  line-height: 65px; /* 行高与头像高度一致，确保垂直对齐 */
+.gallery-image {
+  width: 100%;
+  height: 100%;
 }
 
-/* 帖子标题样式 */
-.post-title {
-  font-size: 20px; /* 字体大小 */
-  font-weight: bold; /* 字体加粗 */
-  margin-bottom: 5px; /* 底部外边距 */
-  text-align: center; /* 使标题居中 */
+/* 图片信息 */
+.image-info {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
 
-/* 收藏、点赞和评论按钮区域样式 */
-.action-bar {
-  display: flex; /* 使用 Flexbox 布局 */
-  justify-content: space-between; /* 按钮之间的空间分配 */
-  align-items: center; /* 垂直居中对齐按钮 */
-  border-top: 1px solid #ddd; /* 顶部边框 */
-  padding-top: 10px; /* 上内边距 */
+.image-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
 }
 
-/* 单个按钮样式 */
-.action-item {
-  display: flex; /* 使用 Flexbox 布局 */
-  align-items: center; /* 垂直居中对齐图标和文本 */
+.image-description {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  display: block;
 }
 
-/* 按钮图标样式 */
+.image-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.upload-time {
+  margin-right: 20rpx;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  transition: background 0.3s ease;
+}
+
+.action-btn:active {
+  background-color: #f8f8f8;
+}
+
 .action-icon {
-  width: 24px; /* 图标宽度 */
-  height: 24px; /* 图标高度 */
-  margin-right: 5px; /* 图标与文本之间的间距 */
+  font-size: 48rpx;
 }
 
-/* 按钮文本样式 */
 .action-text {
-  font-size: 14px; /* 字体大小 */
-  color: #007aff; /* 字体颜色 */
+  font-size: 24rpx;
+  color: #666;
 }
 
-/* 评论区域样式 */
-.comments-section {
-  border-top: 1px solid #ddd; /* 顶部边框 */
-  padding-top: 10px; /* 上内边距 */
+/* 相关推荐 */
+.related-section {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
 
-/* 评论输入区样式 */
-.comment-input {
-  display: flex; /* 使用 Flexbox 布局 */
-  margin-bottom: 10px; /* 底部外边距 */
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
 }
 
-/* 评论输入框样式 */
-.comment-input textarea {
-  border: 1px solid #ddd; /* 边框样式 */
-  padding: 10px; /* 内边距 */
-  border-radius: 5px; /* 圆角边框 */
-  margin-right: 10px; /* 输入框与提交按钮之间的间距 */
-  height:20px;
-  width: 90%; /* 调整宽度，根据需要设置百分比或具体值 */
+.related-scroll {
+  white-space: nowrap;
 }
 
-/* 提交按钮样式 */
-.comment-input button {
-  background-color: #007aff; /* 背景颜色 */
-  color: white; /* 字体颜色 */
-  padding: 10px; /* 内边距 */
-  border-radius: 5px; /* 圆角边框 */
-  border: none; /* 去除边框 */
+.related-list {
+  display: flex;
+  gap: 20rpx;
 }
 
-/* 评论列表样式 */
-.comments-list {
-  margin-top: 10px; /* 顶部外边距 */
+.related-item {
+  display: flex;
+  flex-direction: column;
+  width: 200rpx;
+  flex-shrink: 0;
 }
 
-/* 单条评论样式 */
-.comment-item {
-  display: flex; /* 使用 Flexbox 布局 */
-  align-items: center; /* 垂直居中对齐头像和内容 */
-  margin-bottom: 10px; /* 底部外边距 */
+.related-item image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
 }
 
-/* 评论头像样式 */
-.comment-avatar {
-  width: 30px; /* 头像宽度 */
-  height: 30px; /* 头像高度 */
-  border-radius: 50%; /* 圆形头像 */
-  margin-right: 10px; /* 头像与昵称之间的间距 */
+.related-title {
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-
-/* 评论昵称样式 */
-.comment-nickname {
-  font-weight: bold; /* 字体加粗 */
-  margin-right: 5px; /* 昵称与评论内容之间的间距 */
-}
-
-/* 评论内容样式 */
-.comment-content {
-  font-size: 14px; /* 字体大小 */
-}
-
-/* 让评论收藏点赞在同一行的 */
-
-/* 按钮容器的样式 */
-.button-container {
-  display: flex; /* 使用 Flexbox 布局 */
-  justify-content: space-between; /* 在容器内水平分布按钮 */
-  align-items: center; /* 垂直居中对齐按钮 */
-  padding: 10px; /* 内边距，根据需要调整 */
-  width: 90%; /* 调整容器宽度为可用空间的90% */
-  max-width: 600px; /* 最大宽度限制，避免过宽 */
-  margin: 0 auto; /* 居中对齐容器 */
-}
-
-/* 按钮的样式 */
-.button {
-  margin: 0 5px; /* 按钮之间的间距 */
-  padding: 10px 20px; /* 按钮的内边距 */
-  border: none; /* 去掉默认边框 */
-  border-radius: 5px; /* 圆角 */
-  font-size: 14px; /* 字体大小 */
-}
-
-/* 轮播图容器的样式 */
-.carousel-container {
-  width: 100%;
-  height: 300px; /* 调整为所需的高度 */
-  /* overflow: hidden; */
-}
-
-/* 轮播图的样式 */
-.carousel {
-  height: 100%;
-}
-
-.carousel-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-

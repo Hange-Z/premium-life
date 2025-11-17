@@ -1,134 +1,242 @@
-/* container 使得内容区域的布局方式适应屏幕 */
-.container {
+/* 社区页面样式 */
+.community-container {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航 */
+.header {
+  background: white;
+  padding: 40rpx 30rpx 20rpx;
   display: flex;
-  flex-direction: column;
-  padding: 1px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 
-/* 导航项样式 */
-.bottom-navbar {
-  display: flex; /* 使用弹性盒布局 */
-  justify-content: flex-start; /* 使子项靠左对齐 */
-  margin-bottom: 20px; /* 下边距 */
-}
-
-.nav-item {
-  font-size: 20px; /* 默认字体大小 */
-  margin-right: 20px; /* 右边距 */
-  margin: 0 25px;
-  background-color: #ffffff;
-}
-
-/* 激活的导航项样式 */
-.nav-item.active {
-  font-size: 25px; /* 激活时字体变大 */
-  font-weight: bold; /* 加粗 */
-  color: #e9ae0c; /* 文字颜色 */
-}
-/* 动态滚动样式 */
-.dynamicView {
-  flex: 1;
-  background-color: #d3d3d3;
-  overflow-y: scroll;
-}
-
-/* 单个帖子样式 */
-.post1-item {
-  margin: 9px;
-  background-color: #ffffff;
-  /* 帖子背景色 */
-  border-radius: 8px;
-  /* 圆角 */
-  overflow: hidden;
-  /* 避免内容溢出 */
-  box-shadow: 0 1px 5px rgb(255, 255, 255);
-  /* 阴影 */
-  display: flex;
-  height: 100px;
-}
-
-/* 帖子内容样式 */
-.post1-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* 使内容左对齐 */
-}
-
-/* 帖子标题样式 */
-.post1-title {
-  flex: 1;
-  padding: 10px;
-  font-size: 18px;
+.page-title {
+  font-size: 36rpx;
   font-weight: bold;
-  color: #000000;
-  /* 标题颜色 */
+  color: #333;
 }
 
-/* 帖子图片样式 */
-.post1-image {
-  width: 25%;
-  /* 图片占据帖子宽度的四分之一 */
-  height: 100%;
+.user-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  background: #ff6b35;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: white;
 }
 
-/* 作者名字 */
-.post1-author {
-  font-size: 16px;
-  color: #888;
-  margin-left: 10px; /* 或其他你想要的边距值 */
+/* 内容区域 */
+.content {
+  padding: 30rpx;
 }
 
-/* 帖子内容 */
-.post1-body {
-  font-size: 17px;
-  color: #888;
-  margin-left: 10px; /* 或其他你想要的边距值 */
-  align-items: center;     /* 垂直居中 */
-  height: 400px;     /* 设置容器的高度，可以根据实际需要调整 */
+/* 欢迎卡片 */
+.welcome-card {
+  background: linear-gradient(135deg, #ff6b35, #ff9f43);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+  color: white;
 }
 
-/* 图集滚动样式 */
-.galleryView {
-  flex: 1; 
-  background-color: #ffffff; 
-  height: 70%;
+.welcome-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.sub-text {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+/* 功能区域 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.feature-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.feature-item:active {
+  transform: scale(0.95);
+}
+
+.feature-icon {
+  font-size: 48rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.feature-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 动态列表 */
+.posts-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  display: block;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.post-item {
+  border-bottom: 1rpx solid #f0f0f0;
+  padding-bottom: 30rpx;
+}
+
+.post-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.user-avatar-small {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.username {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.post-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.post-content {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.post-actions {
+  display: flex;
+  gap: 40rpx;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  background: #f8f8f8;
+  transition: background 0.3s ease;
+}
+
+.action-btn:active {
+  background: #e0e0e0;
+}
+
+.action-icon {
+  font-size: 24rpx;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.action-btn.liked {
+  background: #ffeef0;
+}
+
+.action-btn.liked .action-text {
+  color: #ff6b35;
+}
+
+/* 图片展示 */
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin: 20rpx 0;
+}
+
+.post-image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  background-color: #f0f0f0;
+}
+
+.post-image.single {
   width: 100%;
-  /* 允许上下滚动 */
-  overflow: auto;
- }  
+  max-width: 500rpx;
+  height: 400rpx;
+}
 
- /* 帖子容器 */
- .posts2-container {
-  display: flex; 
-  flex-wrap: wrap;/* 自动换行*/ 
-  padding: 10px; 
-} 
+/* 评论列表 */
+.comments-section {
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin: 20rpx 0;
+}
 
-/* 每个帖子 */
-.post2 {
-  width: 48%; /* 每个帖子宽度，占两列中的一列 */
-  margin: 1%; /* 帖子之间的间距 */
-  background-color: rgb(255, 255, 255); 
-  border-radius: 10px; 
-  overflow: hidden; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+.comment-item {
+  font-size: 26rpx;
+  line-height: 1.6;
+  margin-bottom: 15rpx;
+  color: #666;
 }
-/* 帖子图片 */
-.post2-image {
-  width: 100%; 
-  height: 150px; /* 图片高度 */
-  object-fit: cover; 
+
+.comment-item:last-child {
+  margin-bottom: 0;
 }
-/* 帖子标题 */
-.post2-title {
-  padding: 10px; 
-  font-size: 14px; 
-  text-align: center; 
-  color: rgb(0, 0, 0); 
+
+.comment-username {
+  color: #ff6b35;
+  font-weight: bold;
 }
-/* 作者名字 */
-.post2-author {
-  font-size: 16px;
-  color: #888;
+
+.comment-content {
+  color: #333;
 }

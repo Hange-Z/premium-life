@@ -1,68 +1,149 @@
+// 图片分享页面逻辑
 Page({
-  onBack() {
-    wx.navigateBack();
-  },
   data: {
-    post: {
-      // id:1,
-      title: '图集标题',
-      author: {
-        avatar: '/assets/皮影图片/双手在头顶举着鞭子单脚站的女生.jpg',
-        nickname: '我是季千寻'
+    galleryImages: [
+      {
+        url: 'https://via.placeholder.com/800x600/ff6b35/ffffff?text=商品图片1',
+        title: '精美商品展示',
+        description: '这是一张精美的商品展示图片，展现了商品的独特魅力。',
+        uploadTime: '2024-01-15',
+        viewCount: 128
       },
-      images: [
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/举手女生.jpg?sign=9ea64fe1b3620d99daf9159142e545bf&t=1730537403' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/叉腰指人的女生.jpg?sign=4aa1aa99157a7a2a91b0d6ecaa5f13a6&t=1730537431' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/双手在头顶举着鞭子单脚站的女生.jpg?sign=e40037d03e6b5799b2d0db91c65eb799&t=1730537438' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/双臂展开的女的.png?sign=092d4ad7bf2de2307e2656c0b11fead8&t=1730537445' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/咬着扫把的怪物.png?sign=50cdc3ae6d9649ea7969f066afea3050&t=1730537452' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/头上有根鸡毛的人.jpeg?sign=9132e5e1cb7ac599600282b3698158cd&t=1730537459' },
-        { src: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/挑着灯的怪物.png?sign=46b3e564b1261615cc130bb1a9735c5a&t=1730537466' },
-      ],
-      likes: 0,
-      comments: []
-    },
-    isFavorited: false,
+      {
+        url: 'https://via.placeholder.com/800x600/ff9f43/ffffff?text=商品图片2',
+        title: '产品细节图',
+        description: '产品细节展示，让您更清楚地了解产品特点。',
+        uploadTime: '2024-01-14',
+        viewCount: 95
+      },
+      {
+        url: 'https://via.placeholder.com/800x600/e74c3c/ffffff?text=商品图片3',
+        title: '使用场景图',
+        description: '产品在实际使用场景中的效果展示。',
+        uploadTime: '2024-01-13',
+        viewCount: 156
+      }
+    ],
+    currentImage: {},
+    relatedImages: [
+      {
+        id: 1,
+        url: 'https://via.placeholder.com/200x150/3498db/ffffff?text=相关1',
+        title: '相关商品1',
+        index: 0
+      },
+      {
+        id: 2,
+        url: 'https://via.placeholder.com/200x150/9b59b6/ffffff?text=相关2',
+        title: '相关商品2',
+        index: 1
+      },
+      {
+        id: 3,
+        url: 'https://via.placeholder.com/200x150/1abc9c/ffffff?text=相关3',
+        title: '相关商品3',
+        index: 2
+      }
+    ],
     isLiked: false,
-    newComment: ''
+    isCollected: false
   },
-  onLoad: function(options) {
-    const postId = options.id;
-    // 模拟获取帖子数据
-    // 可以通过 API 请求获取真实数据
-  },
-  toggleFavorite: function() {
+
+  onLoad(options) {
+    // 设置当前图片信息
     this.setData({
-      isFavorited: !this.data.isFavorited
-    });
+      currentImage: this.data.galleryImages[0]
+    })
   },
-  toggleLike: function() {
-    this.setData({
-      isLiked: !this.data.isLiked,
-      'post.likes': this.data.isLiked ? this.data.post.likes - 1 : this.data.post.likes + 1
-    });
-  },
-  onCommentInput: function(event) {
-    this.setData({
-      newComment: event.detail.value
-    });
-  },
-  submitComment: function() {
-    if (this.data.newComment.trim() === '') return;
+
+  // 预览图片
+  previewImage(e) {
+    const url = e.currentTarget.dataset.url
+    const urls = this.data.galleryImages.map(img => img.url)
     
-    const newComment = {
-      id: Date.now(),
-      avatar: '/assets/皮影图片/头上有根鸡毛的人.jpg',
-      nickname: '评论者昵称',
-      content: this.data.newComment
-    };
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
+
+  // 点赞图片
+  likeImage() {
+    this.setData({
+      isLiked: !this.data.isLiked
+    })
+    
+    wx.showToast({
+      title: this.data.isLiked ? '已点赞' : '取消点赞',
+      icon: 'success'
+    })
+  },
+
+  // 收藏图片
+  collectImage() {
+    this.setData({
+      isCollected: !this.data.isCollected
+    })
+    
+    wx.showToast({
+      title: this.data.isCollected ? '已收藏' : '取消收藏',
+      icon: 'success'
+    })
+  },
+
+  // 下载图片
+  downloadImage() {
+    wx.showLoading({
+      title: '下载中...'
+    })
+
+    // 模拟下载过程
+    setTimeout(() => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '下载成功',
+        icon: 'success'
+      })
+    }, 2000)
+  },
+
+  // 切换到相关图片
+  switchToImage(e) {
+    const index = e.currentTarget.dataset.index
+    const image = this.data.galleryImages[index]
     
     this.setData({
-      post: {
-        ...this.data.post,
-        comments: [...this.data.post.comments, newComment]
-      },
-      newComment: ''
-    });
+      currentImage: image
+    })
+  },
+
+  // 分享图片
+  shareGallery() {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+  },
+
+  // 返回上一页
+  goBack() {
+    wx.navigateBack()
+  },
+
+  // 页面分享
+  onShareAppMessage() {
+    return {
+      title: this.data.currentImage.title,
+      path: '/pages/photo-gallery/photo-gallery',
+      imageUrl: this.data.currentImage.url
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: this.data.currentImage.title,
+      imageUrl: this.data.currentImage.url
+    }
   }
-});
+})

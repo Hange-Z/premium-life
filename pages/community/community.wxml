@@ -1,44 +1,84 @@
-<!--pages/community/community.wxml-->
-<view class="container">
-  <!-- 切换导航栏 -->
-  <view class="bottom-navbar">
-    <button class="nav-item {{currentTab === 'dynamic' ? 'active' : ''}}" bindtap="switchTab" data-tab="dynamic">动态</button>
-    <button class="nav-item {{currentTab === 'gallery' ? 'active' : ''}}" bindtap="switchTab" data-tab="gallery">图集</button>
+<!-- 社区页面 -->
+<view class="community-container">
+  <!-- 顶部导航 -->
+  <view class="header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <text class="page-title">社区</text>
+    <view class="user-avatar">👤</view>
   </view>
-  <scroll-view class="dynamicView" scroll-y="ture" wx:if="{{currentTab === 'dynamic'}}">
-    <!-- 动态内容 -->
-    <view class="post1-list">
-      <block wx:for="{{posts1}}" wx:key="index">
-        <!-- 添加点击跳转标签 -->
-        <navigator url="/pages/postPage/postPage?id={{item.id}}" class="post1-item">
-          <!-- 帖子主体 -->
-          <view class="post1-content">
-            <!-- 帖子标题 -->
-            <view class="post1-title">{{item.title}}</view>
-            <!-- 帖子内容 -->
-            <view class="post1-body">{{item.body}}</view>
-            <!-- 帖子作者 -->
-            <view class="post1-author">{{item.author}}</view>
-          </view>
-          <!-- 帖子图片 -->
-          <image class="post1-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
-        </navigator>
-      </block>
+
+  <!-- 内容区域 -->
+  <view class="content">
+    <view class="welcome-card">
+      <text class="welcome-text">欢迎来到商品社区</text>
+      <text class="sub-text">分享购物心得，发现更多好物</text>
     </view>
-  </scroll-view>
-  <scroll-view class="galleryView" scroll-y="ture" wx:if="{{currentTab === 'gallery'}}">
-    <!-- 图集内容 -->
-    <view class="posts2-container">
-      <!-- 循环生成帖子 -->
-      <view class="post2" wx:for="{{posts2}}" wx:key="index">
-        <!-- 添加点击跳转标签 -->
-        <navigator url="/pages/photo-gallery/photo-gallery?id={{item.id}}" class="post2-item">
-          <image class="post2-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
-          <view class="post2-title">{{item.title}}</view>
-          <!-- 帖子作者 -->
-          <view class="post2-author">{{item.author}}</view>
-        </navigator>
+
+    <!-- 功能区域 -->
+    <view class="feature-grid">
+      <view class="feature-item" bindtap="goToPosts">
+        <text class="feature-icon">📝</text>
+        <text class="feature-text">发布动态</text>
+      </view>
+      <view class="feature-item" bindtap="goToGallery">
+        <text class="feature-icon">📸</text>
+        <text class="feature-text">图片分享</text>
+      </view>
+      <view class="feature-item" bindtap="goToCollection">
+        <text class="feature-icon">❤️</text>
+        <text class="feature-text">我的收藏</text>
       </view>
     </view>
-  </scroll-view>
+
+    <!-- 动态列表 -->
+    <view class="posts-section">
+      <text class="section-title">最新动态</text>
+      <view class="post-list">
+        <view class="post-item" wx:for="{{posts}}" wx:key="id">
+          <view class="post-header">
+            <image class="user-avatar-small" src="{{item.avatar}}" />
+            <text class="username">{{item.username}}</text>
+            <text class="post-time">{{item.time}}</text>
+          </view>
+          <text class="post-content">{{item.content}}</text>
+          
+          <!-- 图片展示 -->
+          <view class="post-images" wx:if="{{item.images && item.images.length > 0}}">
+            <image 
+              class="post-image {{item.images.length === 1 ? 'single' : ''}}"
+              wx:for="{{item.images}}"
+              wx:key="index"
+              src="{{item}}"
+              mode="aspectFill"
+              bindtap="previewImage"
+              data-url="{{item}}"
+              data-urls="{{item.images}}"
+            ></image>
+          </view>
+          
+          <!-- 评论列表 -->
+          <view class="comments-section" wx:if="{{item.commentsList && item.commentsList.length > 0}}">
+            <view 
+              class="comment-item"
+              wx:for="{{item.commentsList}}"
+              wx:key="id"
+            >
+              <text class="comment-username">{{item.username}}：</text>
+              <text class="comment-content">{{item.content}}</text>
+            </view>
+          </view>
+          
+          <view class="post-actions">
+            <view class="action-btn {{item.liked ? 'liked' : ''}}" bindtap="likePost" data-id="{{item.id}}">
+              <text class="action-icon">{{item.liked ? '❤️' : '👍'}}</text>
+              <text class="action-text">{{item.likes}}</text>
+            </view>
+            <view class="action-btn" bindtap="commentPost" data-id="{{item.id}}">
+              <text class="action-icon">💬</text>
+              <text class="action-text">{{item.comments}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,0 +1,67 @@
+<!-- 用户中心页面 -->
+<view class="profile-container">
+  <!-- 用户信息区域 -->
+  <view class="user-header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <view class="user-info" bindtap="editProfile">
+      <image class="user-avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="user-name">{{userInfo.nickname}}</text>
+        <text class="user-level">{{userInfo.level}}</text>
+      </view>
+      <text class="edit-icon">›</text>
+    </view>
+  </view>
+
+  <!-- 订单统计 -->
+  <view class="order-stats">
+    <view class="stats-header" bindtap="goToOrders" data-status="all">
+      <text class="stats-title">我的订单</text>
+      <text class="stats-more">查看全部 ›</text>
+    </view>
+    <view class="stats-items">
+      <view class="stats-item" bindtap="goToOrders" data-status="unpaid">
+        <text class="stats-icon">💰</text>
+        <text class="stats-label">待付款</text>
+        <text class="stats-badge" wx:if="{{orderStats.unpaid > 0}}">{{orderStats.unpaid}}</text>
+      </view>
+      <view class="stats-item" bindtap="goToOrders" data-status="unshipped">
+        <text class="stats-icon">📦</text>
+        <text class="stats-label">待发货</text>
+        <text class="stats-badge" wx:if="{{orderStats.unshipped > 0}}">{{orderStats.unshipped}}</text>
+      </view>
+      <view class="stats-item" bindtap="goToOrders" data-status="unconfirmed">
+        <text class="stats-icon">🚚</text>
+        <text class="stats-label">待收货</text>
+        <text class="stats-badge" wx:if="{{orderStats.unconfirmed > 0}}">{{orderStats.unconfirmed}}</text>
+      </view>
+      <view class="stats-item" bindtap="goToOrders" data-status="uncommented">
+        <text class="stats-icon">⭐</text>
+        <text class="stats-label">待评价</text>
+        <text class="stats-badge" wx:if="{{orderStats.uncommented > 0}}">{{orderStats.uncommented}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view 
+      class="menu-item" 
+      wx:for="{{menuItems}}" 
+      wx:key="id"
+      bindtap="goToMenu"
+      data-path="{{item.path}}"
+    >
+      <text class="menu-icon">{{item.icon}}</text>
+      <text class="menu-title">{{item.title}}</text>
+      <view class="menu-right">
+        <text class="menu-badge" wx:if="{{item.badge > 0}}">{{item.badge}}</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+

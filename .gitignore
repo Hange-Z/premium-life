@@ -1,14 +1,12 @@
-# Windows
-[Dd]esktop.ini
-Thumbs.db
-$RECYCLE.BIN/
-
-# macOS
-.DS_Store
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-
-# Node.js
+project.config.json
+project.private.config.json
+settings/
+unpackage/
+*.user
+*.log
+npm-debug.log*
 node_modules/
+.vscode/
+.idea/
+*.swp
+*.swo

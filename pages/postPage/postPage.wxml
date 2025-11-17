@@ -1,55 +1,82 @@
-<!-- 导航栏以及返回键 -->
-<view class="navbar">
-  <view class="back-button" bindtap="onBack">
-    <image src="cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/返回_compressed.png" class="back-icon" />
-  </view>
-  <!-- <text class="title">我的收藏</text> -->
-</view>
-
-
-<view class="container">
-  <!-- 帖子标题 -->
-  <view class="post-title">{{post.title}}</view>
-
-  <!-- 作者信息 -->
-  <view class="author-info">
-    <image class="author-avatar" src="{{post.author.avatar}}" />
-    <text class="author-nickname">{{post.author.nickname}}</text>
+<!-- 发布动态页面 -->
+<view class="post-page-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">发布动态</text>
+    <view class="publish-btn" bindtap="publishPost">发布</view>
   </view>
 
-  <!-- 帖子内容 -->
-  <view class="post-content">{{post.content}}</view>
-  <view class="button-container">
-    <!-- 收藏、点赞和评论按钮 -->
-    <view class="action-bar">
-      <view class="action-item" bindtap="toggleFavorite">
-        <image class="action-icon" src="{{isFavorited ? 'cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/已收藏_compressed.png' : 'cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/收藏_compressed.png'}}" />
-        <!-- <text class="action-text">收藏</text> -->
-      </view>
-      <view class="action-item" bindtap="toggleLike">
-        <image class="action-icon" src="{{isLiked ? 'cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/点赞蓝色_compressed.png' : 'cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/点赞灰色_compressed.png'}}" />
-        <!-- <text class="action-text">点赞</text> -->
-        <text class="action-text">{{post.likes}}</text>
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 文本输入区 -->
+    <view class="text-input-section">
+      <textarea 
+        class="post-textarea" 
+        placeholder="分享你的购物心得..." 
+        bindinput="onTextInput"
+        value="{{postContent}}"
+        maxlength="500"
+      ></textarea>
+      <text class="char-count">{{postContent.length}}/500</text>
+    </view>
+
+    <!-- 图片上传区 -->
+    <view class="image-upload-section">
+      <text class="section-title">添加图片</text>
+      <view class="image-grid">
+        <view 
+          class="image-item" 
+          wx:for="{{images}}" 
+          wx:key="index"
+        >
+          <image src="{{item}}" mode="aspectFill" />
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+        <view 
+          class="upload-btn" 
+          bindtap="chooseImage" 
+          wx:if="{{images.length < 9}}"
+        >
+          <text class="upload-icon">+</text>
+          <text class="upload-text">添加图片</text>
+        </view>
       </view>
     </view>
 
-    <!-- 评论区 -->
-    <view class="comments-section">
-      <view class="comment-input">
-        <textarea placeholder="写下你的评论..." bindinput="onCommentInput" />
-        <button bindtap="submitComment">提交</button>
+    <!-- 商品关联区 -->
+    <view class="product-section">
+      <text class="section-title">关联商品</text>
+      <view class="product-selector" bindtap="selectProduct">
+        <view class="selected-product" wx:if="{{selectedProduct}}">
+          <image src="{{selectedProduct.image}}" mode="aspectFill" />
+          <view class="product-info">
+            <text class="product-title">{{selectedProduct.title}}</text>
+            <text class="product-price">¥{{selectedProduct.price}}</text>
+          </view>
+          <view class="remove-btn" bindtap="removeProduct">×</view>
+        </view>
+        <view class="select-product-btn" wx:else>
+          <text class="select-icon">🛍️</text>
+          <text class="select-text">选择商品</text>
+        </view>
       </view>
-
     </view>
 
-  </view>
-  <view class="comments-list">
-    <block wx:for="{{post.comments}}" wx:key="id">
-      <view class="comment-item">
-        <image class="comment-avatar" src="{{item.avatar}}" />
-        <text class="comment-nickname">{{item.nickname}}:</text>
-        <text class="comment-content">{{item.content}}</text>
+    <!-- 标签选择区 -->
+    <view class="tags-section">
+      <text class="section-title">添加标签</text>
+      <view class="tags-grid">
+        <view 
+          class="tag-item {{item.selected ? 'selected' : ''}}"
+          wx:for="{{tags}}" 
+          wx:key="id"
+          bindtap="toggleTag"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
       </view>
-    </block>
+    </view>
   </view>
 </view>

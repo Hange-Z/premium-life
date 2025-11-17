@@ -1,0 +1,115 @@
+<!-- 订单列表页面 -->
+<view class="orders-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">我的订单</text>
+    <view class="header-placeholder"></view>
+  </view>
+  <!-- 标签栏 -->
+  <view class="tabs-bar">
+    <view 
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-tab="{{item.key}}"
+      bindtap="switchTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="orders-list">
+    <!-- 空状态 -->
+    <view class="empty-orders" wx:if="{{filteredOrders.length === 0}}">
+      <text class="empty-icon">📦</text>
+      <text class="empty-text">暂无订单</text>
+    </view>
+
+    <!-- 订单项 -->
+    <view 
+      class="order-item"
+      wx:for="{{filteredOrders}}"
+      wx:key="id"
+      bindtap="viewOrderDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <text class="order-id">订单号：{{item.id}}</text>
+        <text class="order-status {{item.status}}">{{item.statusText || item.status}}</text>
+      </view>
+
+      <!-- 订单商品 -->
+      <view class="order-items">
+        <view 
+          class="order-item-product"
+          wx:for="{{item.items}}"
+          wx:key="id"
+          wx:for-item="product"
+        >
+          <image class="product-image" src="{{product.image}}" mode="aspectFill"></image>
+          <view class="product-info">
+            <text class="product-title">{{product.title}}</text>
+            <text class="product-spec">{{product.spec}}</text>
+            <view class="product-bottom">
+              <text class="product-price">¥{{product.price}}</text>
+              <text class="product-quantity">x{{product.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 订单底部 -->
+      <view class="order-footer">
+        <text class="order-time">{{item.createTime}}</text>
+        <view class="order-total">
+          <text class="total-label">合计：</text>
+          <text class="total-price">¥{{item.totalPrice}}</text>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="order-actions">
+        <button 
+          class="action-btn secondary"
+          wx:if="{{item.status === 'unpaid'}}"
+          catchtap="cancelOrder"
+          data-id="{{item.id}}"
+        >
+          取消订单
+        </button>
+        <button 
+          class="action-btn primary"
+          wx:if="{{item.status === 'unpaid'}}"
+          catchtap="payOrder"
+          data-id="{{item.id}}"
+        >
+          立即支付
+        </button>
+        <button 
+          class="action-btn primary"
+          wx:if="{{item.status === 'unconfirmed'}}"
+          catchtap="confirmReceive"
+          data-id="{{item.id}}"
+        >
+          确认收货
+        </button>
+        <button 
+          class="action-btn secondary"
+          wx:if="{{item.status === 'completed'}}"
+          catchtap="buyAgain"
+          data-order="{{item}}"
+        >
+          再次购买
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+

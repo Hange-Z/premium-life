@@ -1,59 +1,132 @@
+// 发布动态页面逻辑
 Page({
-  onBack() {
-    wx.navigateBack();
-  },
   data: {
-    post: {
-      title: '帖子标题',
-      author: {
-        avatar: 'https://7368-shadow-0gooh3356a2f78ff-1330756691.tcb.qcloud.la/Assets/素材/图片/皮影图片/挑着灯的怪物.png?sign=46b3e564b1261615cc130bb1a9735c5a&t=1730537466',
-        nickname: '我是季千寻'
-      },
-      content: '皮影戏是中国传统的民间艺术形式之一，具有悠久的历史和独特的文化价值。它起源于中国汉代，经过数百年的发展，形成了具有地方特色的各种风格。皮影戏不仅是中国文化的重要组成部分，也是世界非物质文化遗产的珍贵遗产。一、皮影戏的历史背景皮影戏的历史可以追溯到公元前2世纪的汉朝，当时的皮影戏是以剪纸为主要形式的戏剧演出。这种戏剧形式最初由汉代的艺人们在皇宫逐渐形成了具有独特风格的艺术形式。在唐代，皮影戏开始受到广泛关注，并逐渐发展成为一种主要的戏剧形式。唐代的皮影戏不仅在国内流行，雕刻式**：皮影戏的表演主要通过在幕布上投射皮影的影像来完成。演员们站在幕布的另一侧，通过手中的木棍或线绳操控皮影，使其在灯光下做出各种动作和姿势。3. **音乐与配乐**：皮影戏的音乐和配乐也是其重要的艺术特点之一。传统的皮影戏音乐通常由鼓、锣、钹等乐器演奏，并配以歌唱和口技。音乐的节奏和旋律与皮影戏的剧情和人物动作密切配合，为观众提供了丰富的听觉享受。4. **戏剧内容**：皮影戏的剧本内容丰富多彩，涵盖了历史、神话、民间故事等多个方面。传统的皮影戏剧本多以古代历史故事、民间传说为题材，通过生动的表演和音乐展示了人物的情感和故事的情的文化色彩。',
-      likes: 0,
-      comments: []
-    },
-    isFavorited: false,
-    isLiked: false,
-    newComment: ''
+    postContent: '',
+    images: [],
+    selectedProduct: null,
+    tags: [
+      { id: 1, name: '美食', selected: false },
+      { id: 2, name: '购物', selected: false },
+      { id: 3, name: '生活', selected: false },
+      { id: 4, name: '推荐', selected: false },
+      { id: 5, name: '新品', selected: false },
+      { id: 6, name: '优惠', selected: false }
+    ]
   },
-  onLoad: function(options) {
-    const postId = options.id;
-    // 模拟获取帖子数据
-    // 可以通过 API 请求获取真实数据
+
+  onLoad() {
+    console.log('发布动态页面加载')
   },
-  toggleFavorite: function() {
+
+  // 文本输入
+  onTextInput(e) {
     this.setData({
-      isFavorited: !this.data.isFavorited
-    });
+      postContent: e.detail.value
+    })
   },
-  toggleLike: function() {
+
+  // 选择图片
+  chooseImage() {
+    const that = this
+    wx.chooseImage({
+      count: 9 - that.data.images.length,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        const tempFilePaths = res.tempFilePaths
+        that.setData({
+          images: [...that.data.images, ...tempFilePaths]
+        })
+      }
+    })
+  },
+
+  // 删除图片
+  deleteImage(e) {
+    const index = e.currentTarget.dataset.index
+    const images = this.data.images
+    images.splice(index, 1)
+    this.setData({ images })
+  },
+
+  // 选择商品
+  selectProduct() {
+    wx.navigateTo({
+      url: '/pages/category/category?selectMode=true'
+    })
+  },
+
+  // 移除商品
+  removeProduct() {
     this.setData({
-      isLiked: !this.data.isLiked,
-      'post.likes': this.data.isLiked ? this.data.post.likes - 1 : this.data.post.likes + 1
-    });
+      selectedProduct: null
+    })
   },
-  onCommentInput: function(event) {
-    this.setData({
-      newComment: event.detail.value
-    });
+
+  // 切换标签
+  toggleTag(e) {
+    const id = e.currentTarget.dataset.id
+    const tags = this.data.tags
+    const tag = tags.find(t => t.id === id)
+    if (tag) {
+      tag.selected = !tag.selected
+      this.setData({ tags })
+    }
   },
-  submitComment: function() {
-    if (this.data.newComment.trim() === '') return;
+
+  // 发布动态
+  publishPost() {
+    const { postContent, images, selectedProduct, tags } = this.data
     
-    const newComment = {
-      id: Date.now(),
-      avatar: '/assets/皮影图片/头上有根鸡毛的人.jpg',
-      nickname: '评论者昵称',
-      content: this.data.newComment
-    };
-    
-    this.setData({
-      post: {
-        ...this.data.post,
-        comments: [...this.data.post.comments, newComment]
-      },
-      newComment: ''
-    });
+    if (!postContent.trim()) {
+      wx.showToast({
+        title: '请输入动态内容',
+        icon: 'none'
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '发布中...'
+    })
+
+    // 模拟发布过程
+    setTimeout(() => {
+      // 保存到本地存储
+      const newPost = {
+        id: Date.now(),
+        username: '我',
+        avatar: 'https://via.placeholder.com/60x60/ff6b35/ffffff?text=我',
+        content: postContent,
+        images: images,
+        time: '刚刚',
+        createTime: new Date().toISOString(),
+        likes: 0,
+        liked: false,
+        comments: 0,
+        commentsList: [],
+        tags: tags.filter(t => t.selected).map(t => t.name)
+      }
+      
+      let posts = wx.getStorageSync('communityPosts') || []
+      posts.unshift(newPost)
+      wx.setStorageSync('communityPosts', posts)
+      
+      wx.hideLoading()
+      wx.showToast({
+        title: '发布成功',
+        icon: 'success'
+      })
+
+      // 返回上一页
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1500)
+    }, 2000)
+  },
+
+  // 返回上一页
+  goBack() {
+    wx.navigateBack()
   }
-});
+})

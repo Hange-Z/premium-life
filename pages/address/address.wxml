@@ -1,0 +1,49 @@
+<!-- 收货地址管理页面 -->
+<view class="address-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">收货地址</text>
+    <view class="add-btn" bindtap="addAddress">+ 新增</view>
+  </view>
+
+  <!-- 地址列表 -->
+  <view class="address-list">
+    <view 
+      class="address-item {{selectMode ? 'selectable' : ''}} {{item.isDefault ? 'default' : ''}}"
+      wx:for="{{addresses}}"
+      wx:key="id"
+      bindtap="selectAddress"
+      data-id="{{item.id}}"
+    >
+      <view class="address-content">
+        <view class="address-header">
+          <text class="address-name">{{item.name}}</text>
+          <text class="address-phone">{{item.phone}}</text>
+          <text class="default-tag" wx:if="{{item.isDefault}}">默认</text>
+        </view>
+        <text class="address-detail">{{item.address}}{{item.detail || ''}}</text>
+      </view>
+      
+      <view class="address-actions" catchtap="stopPropagation" wx:if="{{!selectMode}}">
+        <view class="action-item" bindtap="setDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}">
+          <text class="action-text">设为默认</text>
+        </view>
+        <view class="action-item" bindtap="editAddress" data-id="{{item.id}}">
+          <text class="action-text">编辑</text>
+        </view>
+        <view class="action-item delete" bindtap="deleteAddress" data-id="{{item.id}}">
+          <text class="action-text">删除</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{addresses.length === 0}}">
+      <text class="empty-icon">📍</text>
+      <text class="empty-text">暂无收货地址</text>
+      <button class="btn-primary" bindtap="addAddress">添加地址</button>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,66 @@
+<!-- 订单确认页面 -->
+<view class="order-confirm-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">确认订单</text>
+    <view class="header-placeholder"></view>
+  </view>
+  <!-- 收货地址 -->
+  <view class="address-section" bindtap="selectAddress">
+    <view class="address-content">
+      <view class="address-info">
+        <text class="address-name">{{address.name}}</text>
+        <text class="address-phone">{{address.phone}}</text>
+      </view>
+      <text class="address-detail">{{address.address}}</text>
+    </view>
+    <text class="address-arrow">›</text>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="items-section">
+    <view class="section-title">商品信息</view>
+    <view 
+      class="order-item"
+      wx:for="{{items}}"
+      wx:key="id"
+    >
+      <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="item-info">
+        <text class="item-title">{{item.title}}</text>
+        <text class="item-spec">{{item.spec}}</text>
+        <view class="item-bottom">
+          <text class="item-price">¥{{item.price}}</text>
+          <text class="item-quantity">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="remark-section">
+    <view class="section-title">备注</view>
+    <textarea 
+      class="remark-input"
+      placeholder="选填，对本次购买的说明"
+      bindinput="onRemarkInput"
+      value="{{remark}}"
+      maxlength="100"
+    ></textarea>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="checkout-bar">
+    <view class="total-info">
+      <text class="total-label">合计：</text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+    <button class="submit-btn" bindtap="submitOrder">提交订单</button>
+  </view>
+</view>
+
+
+
+
+

@@ -1,0 +1,67 @@
+<!-- 我的钱包页面 -->
+<view class="wallet-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">我的钱包</text>
+    <view class="header-placeholder"></view>
+  </view>
+  <!-- 余额/积分卡片 -->
+  <view class="balance-card">
+    <view class="balance-header">
+      <text class="balance-label" wx:if="{{currentTab === 'balance'}}">账户余额</text>
+      <text class="balance-label" wx:else>我的积分</text>
+      <view class="tab-switch">
+        <view 
+          class="switch-item {{currentTab === 'balance' ? 'active' : ''}}"
+          bindtap="switchTab"
+          data-tab="balance"
+        >
+          余额
+        </view>
+        <view 
+          class="switch-item {{currentTab === 'points' ? 'active' : ''}}"
+          bindtap="switchTab"
+          data-tab="points"
+        >
+          积分
+        </view>
+      </view>
+    </view>
+    <view class="balance-amount">
+      <text class="amount-symbol" wx:if="{{currentTab === 'balance'}}">¥</text>
+      <text class="amount-value">{{currentTab === 'balance' ? balance.toFixed(2) : points}}</text>
+    </view>
+    <view class="balance-actions" wx:if="{{currentTab === 'balance'}}">
+      <button class="action-btn" bindtap="recharge">充值</button>
+      <button class="action-btn" bindtap="withdraw">提现</button>
+    </view>
+  </view>
+
+  <!-- 最近交易 -->
+  <view class="transactions-section">
+    <view class="section-header">
+      <text class="section-title">最近交易</text>
+      <text class="view-more" bindtap="viewDetails">查看全部 ›</text>
+    </view>
+    <view class="transactions-list">
+      <view 
+        class="transaction-item"
+        wx:for="{{transactions.slice(0, 5)}}"
+        wx:key="id"
+      >
+        <view class="transaction-info">
+          <text class="transaction-desc">{{item.description}}</text>
+          <text class="transaction-time">{{item.time}}</text>
+        </view>
+        <text class="transaction-amount {{item.amount > 0 ? 'positive' : 'negative'}}">
+          {{item.amount > 0 ? '+' : ''}}{{item.amount.toFixed(2)}}
+        </text>
+      </view>
+      <view class="empty-transactions" wx:if="{{transactions.length === 0}}">
+        <text class="empty-text">暂无交易记录</text>
+      </view>
+    </view>
+  </view>
+</view>
+

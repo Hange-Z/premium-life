@@ -1,14 +1,61 @@
 {
-  "pages": [ 
+  "pages": [
+    "pages/category/category",
     "pages/community/community",
-    "pages/collection/collection",  
+    "pages/collection/collection",
+    "pages/cart/cart",
+    "pages/profile/profile",
     "pages/postPage/postPage", 
-    "pages/photo-gallery/photo-gallery"  
+    "pages/photo-gallery/photo-gallery",
+    "pages/orders/orders",
+    "pages/order-confirm/order-confirm",
+    "pages/order-detail/order-detail",
+    "pages/address/address",
+    "pages/address-edit/address-edit",
+    "pages/coupons/coupons",
+    "pages/wallet/wallet",
+    "pages/points/points",
+    "pages/service/service",
+    "pages/settings/settings",
+    "pages/edit-profile/edit-profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom",
-    "navigationBarTitleText": "固定导航栏示例"
+    "navigationBarTitleText": "商品分类小程序",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff6b35",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "images/category.png",
+        "selectedIconPath": "images/category-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "images/community.png",
+        "selectedIconPath": "images/community-active.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/cart.png",
+        "selectedIconPath": "images/cart-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

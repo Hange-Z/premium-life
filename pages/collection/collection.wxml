@@ -1,51 +1,68 @@
-<view class="container">
-  <!-- 最上方的固定导航栏 -->
-  <view class="top-navbar">
-    <view class="back-button" bindtap="onBack">
-      <image src="cloud://shadow-0gooh3356a2f78ff.7368-shadow-0gooh3356a2f78ff-1330756691/图标/返回_compressed.png" class="back-icon" />
+<!-- 收藏页面 -->
+<view class="collection-container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">←</view>
+    <text class="page-title">我的收藏</text>
+    <view class="header-actions">
+      <text class="action-btn" bindtap="selectAll">全选</text>
+      <text class="action-btn" bindtap="deleteSelected">删除</text>
     </view>
-    <text>我的收藏</text>
   </view>
 
-  <!-- 切换导航栏 -->
-  <view class="bottom-navbar">
-    <button class="nav-item {{currentTab === 'dynamic' ? 'active' : ''}}" bindtap="switchTab" data-tab="dynamic">动态</button>
-    <button class="nav-item {{currentTab === 'gallery' ? 'active' : ''}}" bindtap="switchTab" data-tab="gallery">图集</button>
-  </view>
-  <scroll-view class="dynamicView" scroll-y="ture" wx:if="{{currentTab === 'dynamic'}}">
-    <!-- 动态内容 -->
-    <view class="post1-list">
-      <block wx:for="{{posts1}}" wx:key="index">
-        <!-- 添加点击跳转标签 -->
-        <navigator url="/pages/postPage/postPage?id={{item.id}}" class="post1-item">
-          <!-- 帖子主体 -->
-          <view class="post1-content">
-            <!-- 帖子标题 -->
-            <view class="post1-title">{{item.title}}</view>
-            <!-- 帖子内容 -->
-            <view class="post1-body">{{item.body}}</view>
-            <!-- 帖子作者 -->
-            <view class="post1-author">{{item.author}}</view>
-          </view>
-          <!-- 帖子图片 -->
-          <image class="post1-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
-        </navigator>
-      </block>
-    </view>
-  </scroll-view>
-
-  <scroll-view class="galleryView" scroll-y="ture" wx:if="{{currentTab === 'gallery'}}">
-    <!-- 图集内容 -->
-    <view class="posts2-container">
-      <!-- 循环生成帖子 -->
-      <view class="post2" wx:for="{{posts2}}" wx:key="index">
-        <!-- 添加点击跳转标签 -->
-        <navigator url="/pages/photo-gallery/photo-gallery?id={{item.id}}" class="post2-item">
-          <image class="post2-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
-          <view class="post2-title">{{item.title}}</view>
-          <view class="post2-author">{{item.author}}</view>
-        </navigator>
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 收藏统计 -->
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-number">{{totalItems}}</text>
+        <text class="stat-label">收藏商品</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{totalValue}}</text>
+        <text class="stat-label">总价值</text>
       </view>
     </view>
-  </scroll-view>
+
+    <!-- 收藏列表 -->
+    <view class="collection-list" wx:if="{{collections.length > 0}}">
+      <view class="collection-item" wx:for="{{collections}}" wx:key="id">
+        <view class="item-checkbox" bindtap="toggleSelect" data-id="{{item.id}}">
+          <text class="checkbox {{item.selected ? 'checked' : ''}}">{{item.selected ? '✓' : ''}}</text>
+        </view>
+        <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="item-info">
+          <text class="item-title">{{item.title}}</text>
+          <text class="item-spec">规格：{{item.spec}}</text>
+          <view class="item-price-section">
+            <text class="item-price">¥{{item.price}}</text>
+            <text class="item-quantity">x{{item.quantity}}</text>
+          </view>
+        </view>
+        <view class="item-actions">
+          <view class="action-icon" bindtap="addToCart" data-item="{{item}}">🛒</view>
+          <view class="action-icon" bindtap="removeFromCollection" data-id="{{item.id}}">🗑️</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <text class="empty-icon">📦</text>
+      <text class="empty-text">暂无收藏商品</text>
+      <text class="empty-subtext">去分类页面发现更多好物吧</text>
+      <button class="btn-primary" bindtap="goToCategory">去逛逛</button>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" wx:if="{{collections.length > 0}}">
+    <view class="select-info">
+      <text class="select-text">已选择 {{selectedCount}} 件商品</text>
+    </view>
+    <view class="bottom-actions">
+      <button class="btn-secondary" bindtap="addSelectedToCart">加入购物车</button>
+      <button class="btn-primary" bindtap="buySelected">立即购买</button>
+    </view>
+  </view>
 </view>

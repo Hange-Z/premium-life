@@ -1,0 +1,140 @@
+/* 收货地址管理页面样式 */
+.address-container {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 40rpx;
+  padding-top: calc(30rpx + env(safe-area-inset-top));
+  background-color: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.back-btn {
+  font-size: 40rpx;
+  color: #333;
+  padding: 10rpx;
+  width: 60rpx;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  text-align: center;
+}
+
+.add-btn {
+  font-size: 28rpx;
+  color: #ff6b35;
+  padding: 10rpx 20rpx;
+  font-weight: bold;
+}
+
+/* 地址列表 */
+.address-list {
+  padding: 20rpx;
+}
+
+.address-item {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.address-item.selectable {
+  cursor: pointer;
+}
+
+.address-item.default {
+  border: 2rpx solid #ff6b35;
+}
+
+.address-content {
+  margin-bottom: 20rpx;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.address-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 20rpx;
+}
+
+.address-phone {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.default-tag {
+  background-color: #ff6b35;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+}
+
+.address-detail {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  display: block;
+}
+
+.address-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.action-item {
+  font-size: 26rpx;
+  color: #666;
+  padding: 8rpx 16rpx;
+}
+
+.action-item.delete {
+  color: #ff6b35;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 40rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.3;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 60rpx;
+}
+

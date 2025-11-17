@@ -1,4 +1,12 @@
 /**app.wxss**/
+/* 全局样式重置 */
+page {
+  height: 100vh;
+  background-color: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* 通用容器样式 */
 .container {
   height: 100%;
   display: flex;
@@ -7,48 +15,113 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
 
+/* 通用按钮样式 */
+.btn {
+  padding: 20rpx 40rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
 
-/*     设置动态内容代码     */
+.btn-primary {
+  background: #ff6b35;
+  color: white;
+}
 
+.btn-primary:active {
+  background: #e55a2b;
+}
 
-/* 全局页面样式，确保页面占满视口高度 */
-page {
+.btn-secondary {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.btn-secondary:active {
+  background: #e0e0e0;
+}
+
+/* 通用卡片样式 */
+.card {
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* 通用文本样式 */
+.text-primary {
+  color: #ff6b35;
+}
+
+.text-secondary {
+  color: #666;
+}
+
+.text-muted {
+  color: #999;
+}
+
+/* 通用间距 */
+.mt-10 { margin-top: 10rpx; }
+.mt-20 { margin-top: 20rpx; }
+.mb-10 { margin-bottom: 10rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.ml-10 { margin-left: 10rpx; }
+.mr-10 { margin-right: 10rpx; }
+
+.p-10 { padding: 10rpx; }
+.p-20 { padding: 20rpx; }
+.px-20 { padding-left: 20rpx; padding-right: 20rpx; }
+.py-20 { padding-top: 20rpx; padding-bottom: 20rpx; }
+
+/* 通用布局 */
+.flex {
   display: flex;
+}
+
+.flex-column {
   flex-direction: column;
-  height: 100vh; 
-  padding-top: 50px; /* 调整以避免被固定的导航栏遮挡 */
 }
 
-/* 导航栏样式，固定在页面顶部 */
-nav {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  background-color: rgb(255, 255, 255); 
-  color: #fff; 
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000; /* 确保它位于其他内容之上 */
+.flex-center {
+  align-items: center;
+  justify-content: center;
 }
 
-
-/* 加固定导航栏代码 */
-
-/* app.wxss */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333;
-  color: #fff;
-  z-index: 1000; 
+.flex-between {
+  justify-content: space-between;
 }
-.content {
-  padding-top: 50px; /* 调整以避免被固定的导航栏遮挡 */
+
+.flex-1 {
+  flex: 1;
+}
+
+/* 通用动画 */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .container {
+    padding: 100rpx 20rpx;
+  }
 }
 
 

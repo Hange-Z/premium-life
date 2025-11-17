@@ -1,0 +1,121 @@
+<!-- 商品分类列表页面 -->
+<view class="category-container">
+  <!-- 顶部搜索栏和用户信息 -->
+  <view class="header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索商品" bindinput="onSearchInput" />
+      <view class="search-icon">🔍</view>
+    </view>
+    <view class="user-info">
+      <text class="username">用户昵称</text>
+      <text class="page-title">分类商品</text>
+      <text class="website-tag">小程序</text>
+    </view>
+  </view>
+
+  <!-- 主体内容区 -->
+  <view class="main-content">
+    <!-- 左侧分类导航 -->
+    <scroll-view class="category-nav" scroll-y="true">
+      <view 
+        class="category-item {{currentCategory === index ? 'active' : ''}}"
+        wx:for="{{categories}}" 
+        wx:key="index"
+        data-index="{{index}}"
+        bindtap="switchCategory"
+      >
+        {{item.name}}
+      </view>
+    </scroll-view>
+
+    <!-- 右侧商品列表 -->
+    <scroll-view class="product-list" scroll-y="true">
+      <!-- 空状态 -->
+      <view class="empty-products" wx:if="{{filteredProducts.length === 0}}">
+        <text class="empty-icon">🔍</text>
+        <text class="empty-text">没有找到相关商品</text>
+      </view>
+      
+      <view class="product-grid" wx:else>
+        <view 
+          class="product-card"
+          wx:for="{{filteredProducts}}" 
+          wx:key="id"
+          data-product="{{item}}"
+          bindtap="showProductDetail"
+        >
+          <image class="product-image" src="{{item.image}}" mode="aspectFill" />
+          <view class="product-info">
+            <text class="product-title">{{item.title}}</text>
+            <view class="price-section">
+              <text class="price">¥{{item.price}}</text>
+              <text class="contribution">赠送 {{item.contribution}} 贡献值</text>
+            </view>
+          </view>
+          <view class="cart-btn" catchtap="addToCart" data-product="{{item}}">
+            🛒
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 商品规格弹窗 -->
+  <view class="modal-overlay {{showModal ? 'show' : ''}}" bindtap="hideModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <!-- 商品基础信息 -->
+      <view class="product-basic-info">
+        <image class="product-thumb" src="{{selectedProduct.image}}" mode="aspectFill" />
+        <view class="product-details">
+          <text class="modal-price">¥{{selectedProduct.price}}</text>
+          <text class="stock-info">库存：{{selectedProduct.stock}}</text>
+          <text class="selected-spec">已选规格：{{selectedSpec}}</text>
+        </view>
+      </view>
+
+      <!-- 规格选择区 -->
+      <view class="spec-section">
+        <text class="spec-title">{{selectedProduct.title}}</text>
+        <scroll-view class="spec-scroll" scroll-x="true">
+          <view class="spec-tags">
+            <view 
+              class="spec-tag {{selectedSpecIndex === index ? 'active' : ''}}"
+              wx:for="{{selectedProduct.specs}}" 
+              wx:key="index"
+              data-index="{{index}}"
+              bindtap="selectSpec"
+            >
+              {{item.name}}
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <!-- 数量选择区 -->
+      <view class="quantity-section">
+        <text class="quantity-label">购买数量：</text>
+        <view class="quantity-controls">
+          <view 
+            class="quantity-btn {{quantity <= 1 ? 'disabled' : ''}}"
+            bindtap="decreaseQuantity"
+          >
+            -
+          </view>
+          <text class="quantity-text">{{quantity}}</text>
+          <view 
+            class="quantity-btn {{quantity >= selectedProduct.stock ? 'disabled' : ''}}"
+            bindtap="increaseQuantity"
+          >
+            +
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-buttons">
+        <button class="btn-cart" bindtap="addToCartFromModal">加入购物车</button>
+        <button class="btn-buy" bindtap="buyNow">立即购买</button>
+      </view>
+    </view>
+  </view>
+</view> 

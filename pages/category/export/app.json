@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "category-page/category" 
+  ],
+  "window": {
+    "navigationBarTitleText": "商品分类",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#00B26A",
+    "backgroundColor": "#F5F5F5"
+  }
+}
